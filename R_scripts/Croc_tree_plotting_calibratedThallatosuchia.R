@@ -7,30 +7,10 @@
 ### Clear the workspace
 rm(list=ls())
 
-### set working directory and make objects for calling the string later
-setwd("~/.../")
-work<-as.character(getwd())
-out<-paste(work,mod,"/diagrams/",sep="")
-
 ### load the ape and phytools libraries
 library(ape)
 library(phytools)
 
-### make a list of all files in the tree input directory
-inputs<-list.files(paste(work,mod,sep=""))
-
-### subset this to include only files that are tre files
-inputs<-subset(inputs,grepl('.nex.con.tre$',inputs))
-
-### make sure its ok
-inputs
-
-### extract a list of names from inputs for plotting file names
-file.names<-substr(inputs,1,nchar(inputs)-nchar(".nex.con.tre"))
-file.names
-
-### List control command, change this from 1-n files and rerun each time
-x<-1
 ###########################################################################
 ######################## Get the data #####################################
 ###########################################################################
@@ -68,7 +48,7 @@ str(tree.rename$node.label)
 ############## fancy node labels colour coded by value ###################
 
 ### make a new vector of the same length as the node label vector
-fill <- character(length(tree.rename$node.label)) 
+fill <- character(length(tree.rename$node.label))
 
 ### values greater than or equal to 0.95 are called red
 fill[tree.rename$node.label >= 0.95] <- "red"
@@ -87,7 +67,7 @@ fill
 ### it looks pretty rubbish to just have the colour dot with no edge so I need to specify that
 ### all the red and blue labels should have a black outline while all the clear ones have none
 ### I've done this the same way as above but it could be done better I'm sure.
-stroke <- character(length(tree.rename$node.label)) 
+stroke <- character(length(tree.rename$node.label))
 
 ### values greater than or equal to 0.95 are called red
 stroke[tree.rename$node.label >= 0.95] <- "black"
@@ -113,7 +93,7 @@ nodelabels(tree.rename$node.label,adj=c(1.1,1.3),frame="none",
            col=ifelse(tree.rename$node.label>0.9,"red",
                       ifelse(tree.rename$node.label>=0.75 & tree.rename$node.label<0.9,"blue","#0000ff00")),cex=1)
 
-### make an offset for the axis as R won't draw it from the tip to the root. The offset is a negative starting point for the axis equivalent to the 
+### make an offset for the axis as R won't draw it from the tip to the root. The offset is a negative starting point for the axis equivalent to the
 ### rounding up we do at the root end of the axis i.e. if we round 227 Mya to 230 Mya then we need to offset by minus 3Ma of distance measured in
 ### branch lengths. To do this we divide the root height by the root age and multiply by -3.
 offset<-3*(max(nodeHeights(tree.rename)/227))
