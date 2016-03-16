@@ -1,8 +1,12 @@
 ---
 title: "Dated Thallatosuchian phylogenetics using MrBayes"
-output: pdf_document
+output: 
+  pdf_document:
+    latex_engine: xelatex
 toc: true
 urlcolor: blue
+mainfont: Calibri
+fontsize: 12
 ---
 
 ```{r setup, include=FALSE}
@@ -15,10 +19,10 @@ knitr::opts_chunk$set(echo = FALSE,
 ```
 
 #Outline
-The purpose of this Rmarkdown document is to allow users to follow our statistical analyses for both the plotting of biogeogpahic analysis results and the subsequent statistics performed on node ages. Analyses are performed using separate R scripts called by this document and users should refer to the unrendered [Notebook.Rmd](https://github.com/James-Kitson/Biogeography/blob/master/Notebook.Rmd) file for links to the relevant scripts.
+The purpose of this Rmarkdown document is to allow users to follow our plotting methods for the dated Bayesian analyses. Analyses are performed using separate R scripts called by this document and users should refer to the unrendered [Croc_notebook.Rmd](https://github.com/James-Kitson/Dating_Crocs.git) file for links to the relevant scripts.
 \newpage
 
-#Thallatosuchian root calibrated between 205mya and 215 mya
+#Analysis with Thallatosuchian root calibrated between 205mya and 215 mya.
 
 ```{r echo=FALSE}
 read_chunk('R_scripts/Croc_tree_plotting_calibratedThallatosuchia.R')
@@ -26,4 +30,8 @@ read_chunk('R_scripts/Croc_tree_plotting_calibratedThallatosuchia.R')
 ```{r fig.width=7, fig.height=10, message=F, warning=F}
 <<calibratedtreeprocess>>
 <<calibratedtreeplot>>
-  
+```
+
+\newpage
+
+#Analysis with Thallatosuchian root uncalibrated.
