@@ -1,30 +1,29 @@
 ---
-title: "Croc_notebook"
-author: '**James Kitson**'
-date: "16 March 2016"
+title: "Dated Thallatosuchian phylogenetics using MrBayes"
 output: pdf_document
+toc: true
+urlcolor: blue
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+require(knitr)
+knitr::opts_chunk$set(echo = FALSE,
+                      warning=FALSE,
+                      message=FALSE,
+                      dev = 'pdf',
+                      fig.align='center')
 ```
 
-## R Markdown
+#Outline
+The purpose of this Rmarkdown document is to allow users to follow our statistical analyses for both the plotting of biogeogpahic analysis results and the subsequent statistics performed on node ages. Analyses are performed using separate R scripts called by this document and users should refer to the unrendered [Notebook.Rmd](https://github.com/James-Kitson/Biogeography/blob/master/Notebook.Rmd) file for links to the relevant scripts.
+\newpage
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+#Thallatosuchian root calibrated between 205mya and 215 mya
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r echo=FALSE}
+read_chunk('R_scripts/Croc_tree_plotting_calibratedThallatosuchia.R')
 ```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r fig.width=7, fig.height=10, message=F, warning=F}
+<<calibratedtreeprocess>>
+<<calibratedtreeplot>>
+  
