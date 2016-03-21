@@ -22,6 +22,15 @@ knitr::opts_chunk$set(echo = FALSE,
 The purpose of this Rmarkdown document is to allow users to follow our plotting methods for the dated Bayesian analyses. Analyses are performed using separate R scripts called by this document and users should refer to the unrendered [Croc_notebook.Rmd](https://github.com/James-Kitson/Dating_Crocs.git) file for links to the relevant scripts.
 \newpage
 
+#Analysis with Thallatosuchian root uncalibrated.
+```{r echo=FALSE}
+read_chunk('R_scripts/Croc_tree_plotting_uncalibratedThallatosuchia.R')
+```
+```{r fig.width=7, fig.height=10, message=F, warning=F}
+<<uncalibratedtreeprocess>>
+<<uncalibratedtreeplot>>
+```
+\newpage
 #Analysis with Thallatosuchian root calibrated between 205mya and 215 mya.
 
 ```{r echo=FALSE}
@@ -32,6 +41,4 @@ read_chunk('R_scripts/Croc_tree_plotting_calibratedThallatosuchia.R')
 <<calibratedtreeplot>>
 ```
 
-\newpage
 
-#Analysis with Thallatosuchian root uncalibrated.
