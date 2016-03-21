@@ -29,6 +29,7 @@ read_chunk('R_scripts/Croc_tree_plotting_uncalibratedThallatosuchia.R')
 ```{r fig.width=7, fig.height=10, message=F, warning=F}
 <<uncalibratedtreeprocess>>
 <<uncalibratedtreeplot>>
+<<uncalibratedlttplot>>
 ```
 \newpage
 #Analysis with Thallatosuchian root calibrated between 205mya and 215 mya.
