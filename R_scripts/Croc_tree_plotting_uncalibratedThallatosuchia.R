@@ -68,6 +68,8 @@ axis(side=1,cex.axis=0.5,padj=1,at=seq(-offset,max(nodeHeights(tree.rename)),by=
 
 #dev.off()
 
+## @knitr uncalibratedlttplot
+
 ### Lineages through time.
 ltt.plot(tree.rename, xaxt="n", xlab="Time (Ma)", ylab="Extant lineages")
 axis(side=1,cex.axis=1.0, padj=1,at=seq(from=-(max(nodeHeights(tree.rename)+offset)), to=0, by=(max(nodeHeights(tree.rename))+offset)/23), labels=seq(230,0,by=-10))
