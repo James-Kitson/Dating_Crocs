@@ -17,8 +17,7 @@ library(phytools)
 ######################## Get the data #####################################
 ###########################################################################
 
-
-### Load the tree from the working directory
+### Load the trees from the working directory
 Bayes.tree.calibrated<-read.nexus("Data/Consensus_trees/MrBayes_calibrated_Thalattosuchia_March2016.nex.con.tre")
 Bayes.tree.uncalibrated<-read.nexus("Data/Consensus_trees/MrBayes_uncalibrated_Thalattosuchia_March2016.nex.con.tre")
 
@@ -38,18 +37,42 @@ tree.uncalibrated<-root(tree.uncalibrated,1)
 offset.uncalibrated<-3*(max(nodeHeights(tree.uncalibrated)/227))
 offset.calibrated<-3*(max(nodeHeights(tree.calibrated)/227))
 
-epochs<-read.csv("Data/Metadata/epochs_and_colours.csv")
+### Read in the geological epoch data
+epochs<-read.csv("Data/Metadata/epochs_and_colours.csv", stringsAsFactors = F)
+
+### calculate the x co-ordinates for the calibrated tree polygons
 epochs$calibrated.start<-(-max(nodeHeights(tree.calibrated)+offset.calibrated)/23)*(epochs$Starting/10)
 epochs$calibrated.end<-(-max(nodeHeights(tree.calibrated)+offset.calibrated)/23)*(epochs$Ending/10)
 
+### calculate the x co-ordinates for the uncalibrated tree polygons
+epochs$uncalibrated.start<-(-max(nodeHeights(tree.uncalibrated)+offset.uncalibrated)/23)*(epochs$Starting/10)
+epochs$uncalibrated.end<-(-max(nodeHeights(tree.uncalibrated)+offset.uncalibrated)/23)*(epochs$Ending/10)
+
+### set up a vector of the epoch colours based on Commission for the Geological Map of the World guidelines
+legend.cols<-rgb(red=epochs$Red, green=epochs$Green, blue=epochs$Blue, alpha=125, maxColorValue = 255)
+
 ## @knitr lttcomparisonplot
 
-par(mfrow=c(2,1))
+par(mfrow=c(2,1),
+    mai=c(1, 1, 0.2, 1))
 ltt.plot(tree.uncalibrated, xaxt="n", xlab="Time (Ma)", ylab="Extant lineages")
-legend(x=-0.08, y=60, legend ="uncalibrated Thallatosuchia",col ="black", lty=1, bty="n", y.intersp = 1.1)
-abline(v=c(-0.3,-0.2))
-axis(side=1,cex.axis=1.0, padj=1,at=seq(from=-(max(nodeHeights(tree.uncalibrated)+offset.uncalibrated)), to=0, by=(max(nodeHeights(tree.uncalibrated))+offset.uncalibrated)/23), labels=seq(230,0,by=-10))
-ltt.plot(tree.calibrated,xaxt="n",col="red", xlab="", ylab="")
-legend(x=-0.08, y=60, legend = "calibrated Thallatosuchia",col = "red",lty=1, bty="n", y.intersp = 1.1)
-axis(side=1,cex.axis=1.0, padj=1,at=seq(from=-(max(nodeHeights(tree.calibrated)+offset.calibrated)), to=0, by=(max(nodeHeights(tree.calibrated))+offset.calibrated)/23), labels=seq(230,0,by=-10))
+title(main="Thallatosuchian root unconstrained")
+### plot the epochs
+for(i in 1:length(epochs$Starting)){
+  polygon(x=c(epochs$uncalibrated.start[i],epochs$uncalibrated.start[i],epochs$uncalibrated.end[i],epochs$uncalibrated.end[i]),
+          y = c(0,65,65,0), border=NA, col =legend.cols[i])
+}
+axis(side=1,cex.axis=0.8, padj=1,at=seq(from=-(max(nodeHeights(tree.uncalibrated)+offset.uncalibrated)), to=0, by=(max(nodeHeights(tree.uncalibrated))+offset.uncalibrated)/23), labels=seq(230,0,by=-10))
+legend("topright", title="Epoch", inset=0.005, legend = epochs$Stage,
+       fill =legend.cols,
+       cex=0.5,
+       bg = "white")
 
+ltt.plot(tree.calibrated, xaxt="n", xlab="Time (Ma)", ylab="Extant lineages")
+title(main="Thallatosuchian root constrained between 205Ma and 215Ma")
+for(i in 1:length(epochs$Starting)){
+  polygon(x=c(epochs$calibrated.start[i],epochs$calibrated.start[i],epochs$calibrated.end[i],epochs$calibrated.end[i]),
+          y = c(0,65,65,0), border=NA, col =legend.cols[i])
+}
+axis(side=1,cex.axis=0.8, padj=1,at=seq(from=-(max(nodeHeights(tree.calibrated)+offset.calibrated)), to=0, by=(max(nodeHeights(tree.calibrated))+offset.calibrated)/23), labels=seq(230,0,by=-10))
+#dev.off()
