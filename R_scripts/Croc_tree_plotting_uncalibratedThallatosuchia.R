@@ -42,8 +42,6 @@ tree.rename$tip.label <- (name$Real.Names[match(tree.rename$tip.label,name$Taxa)
 tree.rename$node.label<-as.numeric(tree.rename$node.label)
 tree.rename$node.label<-round(tree.rename$node.label,digits=2)
 
-tree.rename$node.label<-seq(1,length(tree.rename$node.label),1)
-
 ## @knitr uncalibratedtreeplot
 
 #########################################################
@@ -71,7 +69,9 @@ axis(side=1,cex.axis=0.5,padj=1,at=seq(-offset,max(nodeHeights(tree.rename)),by=
 ## @knitr uncalibratedlttplot
 
 ### Lineages through time.
+#pdf(file="Diagrams/uncalibrated_LTT_plot,pdf")
 ltt.plot(tree.rename, xaxt="n", xlab="Time (Ma)", ylab="Extant lineages")
 axis(side=1,cex.axis=1.0, padj=1,at=seq(from=-(max(nodeHeights(tree.rename)+offset)), to=0, by=(max(nodeHeights(tree.rename))+offset)/23), labels=seq(230,0,by=-10))
+#dev.off()
 
 
