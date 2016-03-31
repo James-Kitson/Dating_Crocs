@@ -65,3 +65,11 @@ offset<-3*(max(nodeHeights(tree.rename)/227))
 axis(side=1,cex.axis=0.5,padj=1,at=seq(-offset,max(nodeHeights(tree.rename)),by=(max(nodeHeights(tree.rename))+offset)/23), labels=seq(230,0,by=-10))
 
 #dev.off()
+
+# @knitr calibratedlttplot
+
+### Lineages through time.
+#pdf(file="Diagrams/calibrated_LTT_plot,pdf")
+ltt.plot(tree.rename, xaxt="n", xlab="Time (Ma)", ylab="Extant lineages")
+axis(side=1,cex.axis=1.0, padj=1,at=seq(from=-(max(nodeHeights(tree.rename)+offset)), to=0, by=(max(nodeHeights(tree.rename))+offset)/23), labels=seq(230,0,by=-10))
+#dev.off()
