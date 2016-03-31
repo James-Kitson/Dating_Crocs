@@ -26,7 +26,7 @@ The purpose of this Rmarkdown document is to allow users to follow our plotting 
 ```{r echo=FALSE}
 read_chunk('R_scripts/Croc_tree_plotting_uncalibratedThallatosuchia.R')
 ```
-```{r fig.width=7, fig.height=10, message=F, warning=F}
+```{r fig.width=7, fig.height=9.5, message=F, warning=F}
 <<uncalibratedtreeprocess>>
 <<uncalibratedtreeplot>>
 <<uncalibratedlttplot>>
@@ -37,9 +37,18 @@ read_chunk('R_scripts/Croc_tree_plotting_uncalibratedThallatosuchia.R')
 ```{r echo=FALSE}
 read_chunk('R_scripts/Croc_tree_plotting_calibratedThallatosuchia.R')
 ```
-```{r fig.width=7, fig.height=10, message=F, warning=F}
+```{r fig.width=7, fig.height=9.5, message=F, warning=F}
 <<calibratedtreeprocess>>
 <<calibratedtreeplot>>
+<<calibratedlttplot>>
 ```
-
+\newpage
+#Lineage through time comparison plots
+```{r echo=FALSE}
+read_chunk('R_scripts/ltt_comparison.R')
+```
+```{r fig.width=7, fig.height=7, message=F, warning=F}
+<<lttcomparisonprocess>>
+<<lttcomparisonplot>>
+```
 
