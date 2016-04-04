@@ -55,7 +55,7 @@ legend.cols<-rgb(red=epochs$Red, green=epochs$Green, blue=epochs$Blue, alpha=125
 
 par(mfrow=c(2,1),
     mai=c(1, 1, 0.2, 1))
-ltt.plot(tree.uncalibrated, xaxt="n", xlab="Time (Ma)", ylab="Extant lineages")
+ltt.plot(tree.uncalibrated, xaxt="n", xlab="Time (Ma)", ylab="Extant lineages", ylim=c(0,70))
 title(main="Thallatosuchian root unconstrained")
 ### plot the epochs
 for(i in 1:length(epochs$Starting)){
@@ -68,7 +68,7 @@ legend("topright", title="Epoch", inset=0.005, legend = epochs$Stage,
        cex=0.5,
        bg = "white")
 
-ltt.plot(tree.calibrated, xaxt="n", xlab="Time (Ma)", ylab="Extant lineages")
+ltt.plot(tree.calibrated, xaxt="n", xlab="Time (Ma)", ylab="Extant lineages", ylim=c(0,70))
 title(main="Thallatosuchian root constrained between 205Ma and 215Ma")
 for(i in 1:length(epochs$Starting)){
   polygon(x=c(epochs$calibrated.start[i],epochs$calibrated.start[i],epochs$calibrated.end[i],epochs$calibrated.end[i]),
