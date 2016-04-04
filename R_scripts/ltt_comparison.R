@@ -60,7 +60,7 @@ title(main="Thallatosuchian root unconstrained")
 ### plot the epochs
 for(i in 1:length(epochs$Starting)){
   polygon(x=c(epochs$uncalibrated.start[i],epochs$uncalibrated.start[i],epochs$uncalibrated.end[i],epochs$uncalibrated.end[i]),
-          y = c(0,65,65,0), border=NA, col =legend.cols[i])
+          y = c(0,70,70,0), border=NA, col =legend.cols[i])
 }
 axis(side=1,cex.axis=0.8, padj=1,at=seq(from=-(max(nodeHeights(tree.uncalibrated)+offset.uncalibrated)), to=0, by=(max(nodeHeights(tree.uncalibrated))+offset.uncalibrated)/23), labels=seq(230,0,by=-10))
 legend("topright", title="Epoch", inset=0.005, legend = epochs$Stage,
@@ -72,7 +72,7 @@ ltt.plot(tree.calibrated, xaxt="n", xlab="Time (Ma)", ylab="Extant lineages", yl
 title(main="Thallatosuchian root constrained between 205Ma and 215Ma")
 for(i in 1:length(epochs$Starting)){
   polygon(x=c(epochs$calibrated.start[i],epochs$calibrated.start[i],epochs$calibrated.end[i],epochs$calibrated.end[i]),
-          y = c(0,65,65,0), border=NA, col =legend.cols[i])
+          y = c(0,70,70,0), border=NA, col =legend.cols[i])
 }
 axis(side=1,cex.axis=0.8, padj=1,at=seq(from=-(max(nodeHeights(tree.calibrated)+offset.calibrated)), to=0, by=(max(nodeHeights(tree.calibrated))+offset.calibrated)/23), labels=seq(230,0,by=-10))
 #dev.off()
