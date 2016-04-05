@@ -4,7 +4,7 @@
 ############## the OTU codes and corresponding real names #################
 ###########################################################################
 
-## @knitr calibratedtreeprocess
+## @knitr constrained_215_treeprocess
 
 ### Clear the workspace
 rm(list=ls())
@@ -19,7 +19,7 @@ library(phytools)
 
 
 ### Load the tree from the working directory
-Bayes.tree<-read.nexus("Data/Consensus_trees/MrBayes_calibrated_Thalattosuchia_March2016.nex.con.tre")
+Bayes.tree<-read.nexus("Data/Consensus_trees/MrBayes_constrained_Thalattosuchia_215Ma_March2016.nex.con.tre")
 ### conformat=simple in MrBayes produces two trees, one with branch lengths
 ### and one with node probabilities, all the modification needs to happen
 ### on the first one so make than an object in its own right
@@ -57,7 +57,7 @@ epochs$calibrated.end<-(max(nodeHeights(tree.rename))-((max(nodeHeights(tree.ren
 ### set up a vector of the epoch colours based on Commission for the Geological Map of the World guidelines
 legend.cols<-rgb(red=epochs$Red, green=epochs$Green, blue=epochs$Blue, alpha=100, maxColorValue = 255)
 
-## @knitr calibratedtreeplot
+## @knitr constrained_215_treeplot
 
 #########################################################
 ### Plot the main combined tree with support values

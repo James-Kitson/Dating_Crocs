@@ -24,23 +24,34 @@ The purpose of this Rmarkdown document is to allow users to follow our plotting 
 
 #Analysis with Thallatosuchian root unconstrained
 ```{r echo=FALSE}
-read_chunk('R_scripts/Croc_tree_plotting_uncalibratedThallatosuchia.R')
+read_chunk('R_scripts/Croc_tree_plotting_unconstrained_Thallatosuchia.R')
 ```
 ```{r fig.width=7, fig.height=9.5, message=F, warning=F}
-<<uncalibratedtreeprocess>>
-<<uncalibratedtreeplot>>
-##<<uncalibratedlttplot>>
+<<unconstrained_treeprocess>>
+<<unconstrained_treeplot>>
+##<<unconstrained_lttplot>>
 ```
 \newpage
-#Analysis with Thallatosuchian root constrained between 205mya and 215 mya.
+#Analysis with Thallatosuchian root constrained between 191 mya and 201 mya.
 
 ```{r echo=FALSE}
-read_chunk('R_scripts/Croc_tree_plotting_calibratedThallatosuchia.R')
+read_chunk('R_scripts/Croc_tree_plotting_constrained_201Ma_Thallatosuchia.R')
 ```
 ```{r fig.width=7, fig.height=9.5, message=F, warning=F}
-<<calibratedtreeprocess>>
-<<calibratedtreeplot>>
-##<<calibratedlttplot>>
+<<constrained_201_treeprocess>>
+<<constrained_201_treeplot>>
+##<<constrained_lttplot>>
+```
+\newpage
+#Analysis with Thallatosuchian root constrained between 205 mya and 215 mya.
+
+```{r echo=FALSE}
+read_chunk('R_scripts/Croc_tree_plotting_constrained_215Ma_Thallatosuchia.R')
+```
+```{r fig.width=7, fig.height=9.5, message=F, warning=F}
+<<constrained_215_treeprocess>>
+<<constrained_215_treeplot>>
+##<<constrained_lttplot>>
 ```
 \newpage
 #Lineage through time comparison plots
