@@ -85,18 +85,18 @@ legend("topright", title="Epoch", inset=0.005, legend = epochs$Stage,
 ltt.plot(tree.constrained201, xaxt="n", xlab="Time (Ma)", ylab="Extant lineages", ylim=c(0,70))
 title(main="Thallatosuchian root constrained between 191Ma and 201Ma")
 for(i in 1:length(epochs$Starting)){
-  polygon(x=c(epochs$constrained.start[i],epochs$constrained.start[i],epochs$constrained.end[i],epochs$constrained.end[i]),
+  polygon(x=c(epochs$constrained201.start[i],epochs$constrained201.start[i],epochs$constrained201.end[i],epochs$constrained201.end[i]),
           y = c(0,70,70,0), border=NA, col =legend.cols[i])
 }
-axis(side=1,cex.axis=0.8, padj=1,at=seq(from=-(max(nodeHeights(tree.constrained)+offset.constrained)), to=0, by=(max(nodeHeights(tree.constrained))+offset.constrained)/23), labels=seq(230,0,by=-10))
+axis(side=1,cex.axis=0.8, padj=1,at=seq(from=-(max(nodeHeights(tree.constrained201)+offset.constrained201)), to=0, by=(max(nodeHeights(tree.constrained201))+offset.constrained201)/23), labels=seq(230,0,by=-10))
 
 ### plot the ltt for the analysis constrained at 215Ma
 ltt.plot(tree.constrained215, xaxt="n", xlab="Time (Ma)", ylab="Extant lineages", ylim=c(0,70))
 title(main="Thallatosuchian root constrained between 205Ma and 215Ma")
 for(i in 1:length(epochs$Starting)){
-  polygon(x=c(epochs$constrained.start[i],epochs$constrained.start[i],epochs$constrained.end[i],epochs$constrained.end[i]),
+  polygon(x=c(epochs$constrained215.start[i],epochs$constrained215.start[i],epochs$constrained215.end[i],epochs$constrained215.end[i]),
           y = c(0,70,70,0), border=NA, col =legend.cols[i])
 }
-axis(side=1,cex.axis=0.8, padj=1,at=seq(from=-(max(nodeHeights(tree.constrained)+offset.constrained)), to=0, by=(max(nodeHeights(tree.constrained))+offset.constrained)/23), labels=seq(230,0,by=-10))
+axis(side=1,cex.axis=0.8, padj=1,at=seq(from=-(max(nodeHeights(tree.constrained215)+offset.constrained215)), to=0, by=(max(nodeHeights(tree.constrained215))+offset.constrained215)/23), labels=seq(230,0,by=-10))
 
 #dev.off()
