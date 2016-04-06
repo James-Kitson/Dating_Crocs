@@ -11,13 +11,13 @@ library(phytools)
 library(plyr)
 
 ### read in the trees
-my.trees201<-read.nexus("Data/Consensus_trees/MrBayes_constrained_Thalattosuchia_201Ma_March2016.nex.con.tre")
-my.trees215<-read.nexus("Data/Consensus_trees/MrBayes_constrained_Thalattosuchia_215Ma_March2016.nex.con.tre")
-my.trees.unconstrained<-read.nexus("Data/Consensus_trees/MrBayes_unconstrained_Thalattosuchia_March2016.nex.con.tre")
+my.trees201<-read.nexus("Data/Consensus_trees/constrained_201Ma_Thallatosuchia_MCC_tree")
+my.trees215<-read.nexus("Data/Consensus_trees/constrained_215Ma_Thallatosuchia_MCC_tree")
+my.trees.unconstrained<-read.nexus("Data/Consensus_trees/unconstrained_Thallatosuchia_MCC_tree")
 
-my.tree201<-my.trees201[[1]]
-my.tree215<-my.trees215[[1]]
-my.tree.unconstrained<-my.trees.unconstrained[[1]]
+my.tree201<-my.trees201
+my.tree215<-my.trees215
+my.tree.unconstrained<-my.trees.unconstrained
 
 
 ### read in the list of names
@@ -36,12 +36,12 @@ obj<-cophylo(my.tree201,my.tree215)
 obj2<-cophylo(my.tree.unconstrained,my.tree201)
 
 ### plot and look at the tip associations
-pdf("Diagrams/branching_comparison_201Mavs215Ma.pdf",30,20)
+pdf("Diagrams/branching_comparison_201Mavs215Ma_MCC.pdf",30,20)
 plot(obj, cex=0.5)
 dev.off()
 
 ### plot and look at the tip associations
-pdf("Diagrams/branching_comparison_unconstrainedvs201Ma.pdf",30,20)
+pdf("Diagrams/branching_comparison_unconstrainedvs201Ma_MCC.pdf",30,20)
 plot(obj2, cex=0.5)
 dev.off()
 
