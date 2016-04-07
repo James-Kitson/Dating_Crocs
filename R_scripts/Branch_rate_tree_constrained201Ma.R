@@ -136,7 +136,7 @@ edge.color <- rep("black", nrow(My.tree$edge))
 edge.color[which(rate.data$branch.results[, "ml.signif.hi"] == 1)] <- "red"
 edge.color[which(rate.data$branch.results[, "ml.signif.lo"] == 1)] <- "blue"
 
-pdf("Diagrams/relative_rates.pdf",30,20)
+pdf("Diagrams/relative_rates201Ma.pdf",30,20)
 # We can now plot our tree with branches coloured by rate (black = non-significant rates, red = significantly high rates, blue = significantly low rates):
 geoscalePhylo(ladderize(My.tree), cex.age=0.6, cex.ts=0.8, cex.tip=1, edge.color=edge.color[match(ladderize(My.tree)$edge[, 2], My.tree$edge[,2])])
 dev.off()
