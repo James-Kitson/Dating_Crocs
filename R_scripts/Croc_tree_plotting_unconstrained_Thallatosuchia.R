@@ -12,6 +12,7 @@ rm(list=ls())
 ### load the ape and phytools libraries
 library(ape)
 library(phytools)
+library(strap)
 
 ###########################################################################
 ######################## Get the data #####################################
@@ -42,61 +43,17 @@ tree.rename$tip.label <- (name$Real.Names[match(tree.rename$tip.label,name$Taxa)
 tree.rename$node.label<-as.numeric(tree.rename$node.label)
 tree.rename$node.label<-round(tree.rename$node.label,digits=2)
 
-### make an offset for the axis as R won't draw it from the tip to the root. The offset is a negative starting point for the axis equivalent to the
-### rounding up we do at the root end of the axis i.e. if we round 227 Mya to 230 Mya then we need to offset by minus 3Ma of distance measured in
-### branch lengths. To do this we divide the root height by the root age and multiply by -3.
-offset<-3*(max(nodeHeights(tree.rename)/227))
-
-### Read in the geological epoch data
-epochs<-read.csv("Data/Metadata/epochs_and_colours.csv", stringsAsFactors = F)
-
-### calculate the x co-ordinates for the calibrated tree polygons
-epochs$calibrated.start<-(max(nodeHeights(tree.rename))-((max(nodeHeights(tree.rename)+offset)/23)*(epochs$Starting/10)))
-epochs$calibrated.end<-(max(nodeHeights(tree.rename))-((max(nodeHeights(tree.rename)+offset)/23)*(epochs$Ending/10)))
-
-### set up a vector of the epoch colours based on Commission for the Geological Map of the World guidelines
-legend.cols<-rgb(red=epochs$Red, green=epochs$Green, blue=epochs$Blue, alpha=100, maxColorValue = 255)
+### scale the edge lengths to the root age of the tree
+tree.rename$edge.length<-tree.rename$edge.length/(max(nodeHeights(tree.rename)/227))
+### set a root age in the tree object for axisPhylo.
+tree.rename$root.time<-227
 
 ## @knitr unconstrained_treeplot
 
 #########################################################
 ### Plot the main combined tree with support values
 #pdf(file=paste(out,file.names[[x]],"_",title,".pdf",sep=""), 30, 30)
-plot(tree.rename,
-     show.node.label=FALSE,
-     cex=0.5,
-     x.lim=0.5,
-     label.offset=0.001)
-nodelabels(tree.rename$node.label,adj=c(1,1),frame="none",
-           col=ifelse(tree.rename$node.label>0.9,"red",
-                      ifelse(tree.rename$node.label>=0.75 & tree.rename$node.label<0.9,"blue","#0000ff00")),cex=0.5)
 
-## put on a the correct axis
-axis(side=1,cex.axis=0.5,padj=1,at=seq(-offset,max(nodeHeights(tree.rename)),by=(max(nodeHeights(tree.rename))+offset)/23), labels=seq(230,0,by=-10))
-
-### epoch plot order for trees
-epoch.order<-seq(from=1, to=13, by=1)
-
-### plot the epochs
-for(i in epoch.order){
-  polygon(x=c(epochs$calibrated.start[i],epochs$calibrated.start[i],epochs$calibrated.end[i],epochs$calibrated.end[i]),
-          y = c(0,120,120,0), border=NA, col =legend.cols[i])
-}
-legend("topright", title="Epoch", inset=0.005, legend = epochs$Stage,
-       fill =legend.cols,
-       cex=0.5,
-       bg = "white")
-
-
+geoscalePhylo(ladderize(tree.rename), cex.age=0.6, cex.ts=0.8, cex.tip=0.6, quat.rm=TRUE, units=c("Period", "Epoch"), boxes= "Epoch")
 
 #dev.off()
-
-## @knitr uncalibratedlttplot
-
-### Lineages through time.
-#pdf(file="Diagrams/uncalibrated_LTT_plot,pdf")
-ltt.plot(tree.rename, xaxt="n", xlab="Time (Ma)", ylab="Extant lineages")
-axis(side=1,cex.axis=1.0, padj=1,at=seq(from=-(max(nodeHeights(tree.rename)+offset)), to=0, by=(max(nodeHeights(tree.rename))+offset)/23), labels=seq(230,0,by=-10))
-#dev.off()
-
-
