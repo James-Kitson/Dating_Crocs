@@ -52,18 +52,6 @@ tree.unconstrained$root.time<-227
 ### Read in the geological epoch data
 epochs<-read.csv("Data/Metadata/epochs_and_colours.csv", stringsAsFactors = F)
 
-### calculate the x co-ordinates for the constrained tree polygons on the 201Ma constrained tree
-epochs$constrained201.start<-(-max(nodeHeights(tree.constrained201)+offset.constrained201)/23)*(epochs$Starting/10)
-epochs$constrained201.end<-(-max(nodeHeights(tree.constrained201)+offset.constrained201)/23)*(epochs$Ending/10)
-
-### calculate the x co-ordinates for the constrained tree polygons on the 201Ma constrained tree
-epochs$constrained215.start<-(-max(nodeHeights(tree.constrained215)+offset.constrained215)/23)*(epochs$Starting/10)
-epochs$constrained215.end<-(-max(nodeHeights(tree.constrained215)+offset.constrained215)/23)*(epochs$Ending/10)
-
-### calculate the x co-ordinates for the unconstrained tree polygons
-epochs$unconstrained.start<-(-max(nodeHeights(tree.unconstrained)+offset.unconstrained)/23)*(epochs$Starting/10)
-epochs$unconstrained.end<-(-max(nodeHeights(tree.unconstrained)+offset.unconstrained)/23)*(epochs$Ending/10)
-
 ### set up a vector of the epoch colours based on Commission for the Geological Map of the World guidelines
 legend.cols<-rgb(red=epochs$Red, green=epochs$Green, blue=epochs$Blue, alpha=125, maxColorValue = 255)
 
@@ -76,7 +64,7 @@ ltt.lines(tree.constrained201, lty=3)
 title(main="Thallatosuchian root unconstrained")
 ### plot the epochs
 for(i in 1:length(epochs$Starting)){
-  polygon(x=c(epochs$unconstrained.start[i],epochs$unconstrained.start[i],epochs$unconstrained.end[i],epochs$unconstrained.end[i]),
+  polygon(x=c(-epochs$Starting[i],-epochs$Starting[i],-epochs$Ending[i],-epochs$Ending[i]),
           y = c(0,70,70,0), border=NA, col =legend.cols[i])
 }
 
@@ -84,3 +72,9 @@ legend("topright", title="Epoch", inset=0.005, legend = epochs$Stage,
        fill =legend.cols,
        cex=0.5,
        bg = "white")
+legend("right",legend=c("Unconstrained Thallatosuchian\nroot","Thallatosuchian root\n205Ma-215Ma","Thallatosuchian root\n19Ma-201Ma"),
+       lty=c(1,2,3),
+       inset=0.005,
+       cex=0.5,
+       bg = "white",
+       y.intersp = 2)
