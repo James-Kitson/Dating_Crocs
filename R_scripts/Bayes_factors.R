@@ -2,8 +2,6 @@
 ############# Script for Bayes Factor test in R #################
 ###########################################################################
 
-## @knitr lttcomparisonprocess
-
 ### Clear the workspace
 rm(list=ls())
 
