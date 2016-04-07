@@ -57,6 +57,11 @@ legend.cols<-rgb(red=epochs$Red, green=epochs$Green, blue=epochs$Blue, alpha=125
 
 ## @knitr lttcomparisonplot
 
+###################################
+### THIS CAN TOTALLY BE DONE BETTER USING geoscalePlot AND ltt.plot.coords
+##################################
+
+
 ### plot the unconstrained ltt
 ltt.plot(tree.unconstrained, xlab="Time (Ma)", ylab="Extant lineages", ylim=c(0,70), lty=1)
 ltt.lines(tree.constrained215, lty=2)
@@ -67,6 +72,8 @@ for(i in 1:length(epochs$Starting)){
   polygon(x=c(-epochs$Starting[i],-epochs$Starting[i],-epochs$Ending[i],-epochs$Ending[i]),
           y = c(0,70,70,0), border=NA, col =legend.cols[i])
 }
+unconsltt<-as.data.frame(ltt.plot.coords(tree.unconstrained,backward = FALSE))
+geoscalePlot(ages=unconsltt$time, data=unconsltt$N)
 
 legend("topright", title="Epoch", inset=0.005, legend = epochs$Stage,
        fill =legend.cols,
