@@ -64,36 +64,10 @@ tree.unconstrained_coords$time<-tree.unconstrained_coords$time*(-1)
 
 ## @knitr lttcomparisonplot
 
-<<<<<<< HEAD
 ###################################
 ### THIS CAN TOTALLY BE DONE BETTER USING geoscalePlot AND ltt.plot.coords
 ##################################
 
-
-### plot the unconstrained ltt
-ltt.plot(tree.unconstrained, xlab="Time (Ma)", ylab="Extant lineages", ylim=c(0,70), lty=1)
-ltt.lines(tree.constrained215, lty=2)
-ltt.lines(tree.constrained201, lty=3)
-title(main="Thallatosuchian root unconstrained")
-### plot the epochs
-for(i in 1:length(epochs$Starting)){
-  polygon(x=c(-epochs$Starting[i],-epochs$Starting[i],-epochs$Ending[i],-epochs$Ending[i]),
-          y = c(0,70,70,0), border=NA, col =legend.cols[i])
-}
-unconsltt<-as.data.frame(ltt.plot.coords(tree.unconstrained,backward = FALSE))
-geoscalePlot(ages=unconsltt$time, data=unconsltt$N)
-
-legend("topright", title="Epoch", inset=0.005, legend = epochs$Stage,
-       fill =legend.cols,
-       cex=0.5,
-       bg = "white")
-legend("right",legend=c("Unconstrained Thallatosuchian\nroot","Thallatosuchian root\n205Ma-215Ma","Thallatosuchian root\n19Ma-201Ma"),
-       lty=c(1,2,3),
-       inset=0.005,
-       cex=0.5,
-       bg = "white",
-       y.intersp = 2)
-=======
 geoscalePlot(tree.unconstrained_coords$time,tree.unconstrained_coords$N,
              units=c("Period", "Epoch"),
              boxes= "Epoch", type="l",
@@ -101,4 +75,4 @@ geoscalePlot(tree.unconstrained_coords$time,tree.unconstrained_coords$N,
              label= "Number of extant lineages")
 lines(tree.constrained215_coords$time,tree.constrained215_coords$N, lty=2)
 lines(tree.constrained201_coords$time,tree.constrained201_coords$N, lty=3)
->>>>>>> fb6b5dcb638a8dd906dce86d918d7d31fcb23c44
+
