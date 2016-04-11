@@ -12,6 +12,7 @@ rm(list=ls())
 ### load the ape and phytools libraries
 library(ape)
 library(phytools)
+library(strap)
 
 ###########################################################################
 ######################## Get the data #####################################
@@ -30,6 +31,10 @@ tree.constrained201<-root(tree.constrained201,1)
 tree.constrained201$edge.length<-tree.constrained201$edge.length/(max(nodeHeights(tree.constrained201)/227))
 ### set a root age in the tree object for axisPhylo.
 tree.constrained201$root.time<-227
+### calculate the values for the lineage through time plot
+tree.constrained201_coords<-as.data.frame(ltt.plot.coords(tree.constrained201, backward=TRUE))
+### invert the ages as the geoscalePlot plots the stratigraphic axis in the opposite direction to geoscalePhylo
+tree.constrained201_coords$time<-tree.constrained201_coords$time*(-1)
 
 ### Process the 215Ma constrained trees
 tree.constrained215<-Bayes.tree.constrained215[[1]]
@@ -39,6 +44,10 @@ tree.constrained215<-root(tree.constrained215,1)
 tree.constrained215$edge.length<-tree.constrained215$edge.length/(max(nodeHeights(tree.constrained215)/227))
 ### set a root age in the tree object for axisPhylo.
 tree.constrained215$root.time<-227
+### calculate the values for the lineage through time plot
+tree.constrained215_coords<-as.data.frame(ltt.plot.coords(tree.constrained215, backward=TRUE))
+### invert the ages as the geoscalePlot plots the stratigraphic axis in the opposite direction to geoscalePhylo
+tree.constrained215_coords$time<-tree.constrained215_coords$time*(-1)
 
 ### Process the unconstrained trees
 tree.unconstrained<-Bayes.tree.unconstrained[[1]]
@@ -48,15 +57,14 @@ tree.unconstrained<-root(tree.unconstrained,1)
 tree.unconstrained$edge.length<-tree.unconstrained$edge.length/(max(nodeHeights(tree.unconstrained)/227))
 ### set a root age in the tree object for axisPhylo.
 tree.unconstrained$root.time<-227
-
-### Read in the geological epoch data
-epochs<-read.csv("Data/Metadata/epochs_and_colours.csv", stringsAsFactors = F)
-
-### set up a vector of the epoch colours based on Commission for the Geological Map of the World guidelines
-legend.cols<-rgb(red=epochs$Red, green=epochs$Green, blue=epochs$Blue, alpha=125, maxColorValue = 255)
+### calculate the values for the lineage through time plot
+tree.unconstrained_coords<-as.data.frame(ltt.plot.coords(tree.unconstrained, backward=TRUE))
+### invert the ages as the geoscalePlot plots the stratigraphic axis in the opposite direction to geoscalePhylo
+tree.unconstrained_coords$time<-tree.unconstrained_coords$time*(-1)
 
 ## @knitr lttcomparisonplot
 
+<<<<<<< HEAD
 ###################################
 ### THIS CAN TOTALLY BE DONE BETTER USING geoscalePlot AND ltt.plot.coords
 ##################################
@@ -85,3 +93,12 @@ legend("right",legend=c("Unconstrained Thallatosuchian\nroot","Thallatosuchian r
        cex=0.5,
        bg = "white",
        y.intersp = 2)
+=======
+geoscalePlot(tree.unconstrained_coords$time,tree.unconstrained_coords$N,
+             units=c("Period", "Epoch"),
+             boxes= "Epoch", type="l",
+             data.lim = c(0,70),
+             label= "Number of extant lineages")
+lines(tree.constrained215_coords$time,tree.constrained215_coords$N, lty=2)
+lines(tree.constrained201_coords$time,tree.constrained201_coords$N, lty=3)
+>>>>>>> fb6b5dcb638a8dd906dce86d918d7d31fcb23c44
