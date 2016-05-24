@@ -20,7 +20,7 @@ library(strap)
 
 
 ### Load the tree from the working directory
-Bayes.tree<-read.nexus("Data/Consensus_trees/MrBayes_constrained_Thalattosuchia_201Ma_March2016.nex.con.tre")
+Bayes.tree<-read.nexus("Data/Consensus_trees/MrBayes_constrained_Thalattosuchia_201Ma_May2016.nex.con.tre")
 ### conformat=simple in MrBayes produces two trees, one with branch lengths
 ### and one with node probabilities, all the modification needs to happen
 ### on the first one so make than an object in its own right
